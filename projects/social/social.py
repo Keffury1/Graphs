@@ -25,7 +25,7 @@ class SocialGraph:
             return True
 
     def add_user(self, name):
-        self.last_id += 1  # automatically increment the ID to assign the new user
+        self.last_id += 1 
         self.users[self.last_id] = User(name)
         self.friendships[self.last_id] = set()
 
@@ -37,17 +37,17 @@ class SocialGraph:
         for i in range(num_users):
             self.add_user(f"User {i}")
         
-        possible_friends = []
+        friends = []
 
         for user_id in self.users:
             for friend_id in range(user_id + 1, self.last_id + 1):
-                possible_friends.append((user_id, friend_id))
+                friends.append((user_id, friend_id))
         
-        random.shuffle(possible_friends)
+        random.shuffle(friends)
 
         for i in range(math.floor(num_users * avg_friendships / 2)):
-            friends = possible_friends[i]
-            self.add_friendship(friends[0], friends[1])
+            friendship = friends[i]
+            self.add_friendship(friendship[0], friendship[1])
 
     def get_all_social_paths(self, user_id):
         visited = {}
